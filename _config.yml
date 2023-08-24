@@ -14,10 +14,10 @@
 # alliance: Digital Research Alliance of Canada
 # molmodsim: Compute Canada Molecular Simulation Team 
 # bst: (compatibility) same as `molmodsim`
-carpentry: "swc"
+carpentry: "alliance"
 
 # Overall title for pages.
-title: "Lesson Title"
+title: "Python on the Cluster"
 
 # Life cycle stage of the lesson
 # See this page for more details: https://cdh.carpentries.org/the-lesson-life-cycle.html
@@ -53,7 +53,7 @@ kind: "lesson"
 repository: <USERNAME>/<PROJECT>
 
 # Email address, no mailto:
-email: "team@carpentries.org"
+email: "cjwant@ualberta.ca"
 
 # Sites.
 coc: "https://docs.carpentries.org/topic_folders/policies/code-of-conduct.html"
@@ -131,3 +131,10 @@ exclude:
 
 # Turn on built-in syntax highlighting.
 highlighter: rouge
+
+episode_order:
+  - introduction
+  - virtual-environments
+  - jobs
+  - jupyterhub
+  - interactive
