@@ -1,6 +1,6 @@
 ---
 title: "Introduction"
-teaching: 0
+teaching: 5
 exercises: 0
 questions:
 - "So you want to run python code on a cluster?"
@@ -25,4 +25,3 @@ We'll look at:
 * (?) Choices for parallelism.
 
 {% include links.md %}
-
