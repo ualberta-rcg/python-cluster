@@ -258,7 +258,7 @@ To run a GPU job, you basically need three things:
    one. You can get the script by running:
 
    ~~~
-   wget ...
+   wget https://raw.githubusercontent.com/ualberta-rcg/python-cluster/gh-pages/files/primes.py
    ~~~
 
    The script `primes.py` we've downloaded computes all of the prime numbers that are less than
