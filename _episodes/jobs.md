@@ -258,11 +258,19 @@ To run a GPU job, you basically need three things:
    one. You can get the script by running:
 
    ~~~
-   wget https://raw.githubusercontent.com/ualberta-rcg/python-cluster/gh-pages/files/primes.py
+   wget https://raw.githubusercontent.com/ualberta-rcg/python-cluster/gh-pages/files/primes-gpu.py
    ~~~
+   {: .language-bash}
 
    The script `primes.py` we've downloaded computes all of the prime numbers that are less than
    5,000,000.
+
+   Also get this version that doesn't use a GPU (uses a CPU only) to calculate the prime numbers less
+   than 1,000,000:
+   ~~~
+   wget https://raw.githubusercontent.com/ualberta-rcg/python-cluster/gh-pages/files/primes-cpu.py
+   ~~~
+   {: .language-bash}
 
 > ## Putting it together ...
 > Let's put things together to write a job script that runs this GPU code. Some features of this
@@ -271,11 +279,20 @@ To run a GPU job, you basically need three things:
 > * Load both the `python` and `cuda` modules.
 > * Create a virtual environment on local disk of the node you are running on,
 >   activate it, upgrade `pip`, and use `pip` to install `numba`
-> * Run the python script
+> * Run the `primes-gpu.py` python script
+> * Record the job id from `squeue`
+> * Write a second submission script and repeat this process to run the CPU version of the
+>   script (`primes-cpu.py`). Don't ask for a GPU this time, you won't need it and you will
+>   end up waiting a long time in the queue. You also don't need to load the CUDA module
+>   (it really doesn't matter though).
+> * Also record the job id for this run.
 >
-> When the job is done, check the output file, and run `seff [jobid]` to see
-> some performance information.
+> When the jobs are done, check the output files, and run `seff [jobid]` to see
+> some performance information for each job
 > > ## Solution
+> >
+> > **`submit-gpu.sh`**
+> >
 > > ~~~
 > > #!/bin/bash
 > >
@@ -294,7 +311,30 @@ To run a GPU job, you basically need three things:
 > > pip install --no-index --upgrade pip
 > > pip install --no-index numba
 > >
-> > python primes.py
+> > python primes-gpu.py
+> > ~~~
+> > {: .language-bash}
+> >
+> > **`submit-cpu.sh`**
+> >
+> > ~~~
+> > #!/bin/bash
+> >
+> > #SBATCH --nodes=1
+> > #SBATCH --tasks-per-node=1
+> > #SBATCH --cpus-per-task=1
+> > #SBATCH --mem-per-cpu=1000M
+> > #SBATCH --time=00:10:00
+> >
+> > module load python/3.11
+> >
+> > virtualenv --no-download $SLURM_TMPDIR/venv
+> > source $SLURM_TMPDIR/venv/bin/activate
+> >
+> > pip install --no-index --upgrade pip
+> > pip install --no-index numba
+> >
+> > python primes-cpu.py
 > > ~~~
 > > {: .language-bash}
 > {: .solution}
