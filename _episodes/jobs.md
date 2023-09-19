@@ -1,18 +1,22 @@
 ---
 title: "Running jobs"
-teaching: 0
-exercises: 0
+teaching: 30
+exercises: 10
 questions:
 - "How do I submit jobs that run python code?"
 - "How do I ensure that my python job has the packages it needs?"
 - "How do I get better input/output performance?"
+- "How do I use a GPU with my code?"
 objectives:
 - "Be able to submit and run jobs that run python code"
-- "Be able to create virtual environments to install packages in"
+- "Be able to create virtual environments to install packages in a job"
+- "Create a virtual environment on local disk"
+- "Run a code on a GPU"
 keypoints:
 - "Submit jobs to run long-running or computationally intensive Python code"
 - "Create virtual environments and install packages from the Alliance wheelhouse"
 - "Working with local disk in a job can provide performance benefits"
+- "You can use the scheduler to ask for a GPU to run code on"
 ---
 
 # Hello world job
@@ -206,3 +210,94 @@ python hello.py
 Note that compute nodes don't have access to the internet to grab
 packages from PyPI, so it's really important to add the `--no-index`
 flag to pip.
+
+## An exercise using GPUs
+
+GPUs (Graphical Processing Units) can speed up a number of different kinds of codes in a
+number of different domains (Machine Learning being a hot example right now).
+
+Your code must be especially written to use the GPU, usually using a library that
+does most of the low-level work.
+
+Most programs and libraries that use one or more GPUs on the Alliance clusters use a special
+library called CUDA (written by NVIDIA) to interface with the GPU card.
+
+There is a Python package called Numba (rhymes with "rhumba", sounds kinda like "number")
+that can use a GPU card.
+
+To run a GPU job, you basically need three things:
+
+1. **You need to request a GPU from the scheduler.**
+   
+   You may want to request a specific type of
+   GPU, but the most generic way to make such a request is to add a line to your batch script
+   that looks like:
+   
+   ```#SBATCH --gres=gpu:1```
+   
+   This tells the scheduler "give me one GPU, I don't care what kind".
+   If the type of GPU is of concern to you, check out the options on the Alliance GPU page:
+   <https://docs.alliancecan.ca/wiki/Using_GPUs_with_Slurm>
+
+2. **You need to load the CUDA modules.**
+   
+   Just like with loading the Python module, we can load CUDA with:
+
+   ```module load cuda```
+   
+   This will allow your software to find the CUDA libraries. You can run
+   `module spider cuda` to find out what versions of CUDA are available.
+
+3. **You need to load a package in your virtual environment that uses the GPU.**
+
+   In this case, we will use `pip` to install `numba` in our virtual environment.
+
+4. **Your Python script must be written to use such a library.**
+   
+   Writing code for the GPU is beyond the scope of this course so we will download
+   one. You can get the script by running:
+
+   ~~~
+   wget ...
+   ~~~
+
+   The script `primes.py` we've downloaded computes all of the prime numbers that are less than
+   5,000,000.
+
+> ## Putting it together ...
+> Let's put things together to write a job script that runs this GPU code. Some features of this
+> script:
+> * Ask Slurm for a GPU (above)
+> * Load both the `python` and `cuda` modules.
+> * Create a virtual environment on local disk of the node you are running on,
+>   activate it, upgrade `pip`, and use `pip` to install `numba`
+> * Run the python script
+>
+> When the job is done, check the output file, and run `seff [jobid]` to see
+> some performance information.
+> > ## Solution
+> > ~~~
+> > #!/bin/bash
+> >
+> > #SBATCH --nodes=1
+> > #SBATCH --tasks-per-node=1
+> > #SBATCH --cpus-per-task=1
+> > #SBATCH --mem-per-cpu=1000M
+> > #SBATCH --time=00:10:00
+> > #SBATCH --gres=gpu:1
+> >
+> > module load python/3.11 cuda
+> >
+> > virtualenv --no-download $SLURM_TMPDIR/venv
+> > source $SLURM_TMPDIR/venv/bin/activate
+> >
+> > pip install --no-index --upgrade pip
+> > pip install --no-index numba
+> >
+> > python primes.py
+> > ~~~
+> > {: .language-bash}
+> {: .solution}
+{: .challenge}
+
+{% include links.md %}
