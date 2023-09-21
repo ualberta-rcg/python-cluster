@@ -3,9 +3,9 @@ import numpy as np
 from math import sqrt, ceil
 
 def main():
-    print(find_primes(1_000_000))
+    print(find_primes(5_000_000))
 
-@nb.vectorize(['int32(int32)'])
+@nb.vectorize(['int32(int32)'], target='cuda')
 def check_prime_gpu(num):
     for i in range(2, (num // 2) + 1):
        if (num % i) == 0:
@@ -25,4 +25,5 @@ def find_primes(num):
         primes += [x for x in out if x > 0]
     return primes
 
-main()
+if __name__ == "__main__":
+    main()

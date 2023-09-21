@@ -17,11 +17,21 @@ We will now look at running Python code on high performance computing (HPC) clus
 involves learning some new techniques for running Python code, often outside of Jupyter
 notebooks.
 
-We'll look at:
+The expectations of the students is that they have previously taken:
+
+* an introduction to bash shell;
+* an introduction to running jobs;
+* an introduction to the Python programming library.
+
+Today we'll look at:
 
 * Virtual environments and installing packages;
 * Submitting jobs that run Python code;
-* Connecting to HPC JupyterHubs;
-* (?) Choices for parallelism.
+* Storage choices and the impact on performance;
+* Interactive jobs;
+* Connecting to HPC JupyterHubs.
+
+At this point, your instructor should have given you access to a training cluster,
+and you should now be logged in.
 
 {% include links.md %}

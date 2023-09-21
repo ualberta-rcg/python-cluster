@@ -258,7 +258,7 @@ To run a GPU job, you basically need three things:
    one. You can get the script by running:
 
    ~~~
-   wget https://raw.githubusercontent.com/ualberta-rcg/python-cluster/gh-pages/files/primes-gpu.py
+   wget https://raw.githubusercontent.com/ualberta-rcg/python-cluster/gh-pages/files/primes_gpu.py
    ~~~
    {: .language-bash}
 
@@ -268,7 +268,7 @@ To run a GPU job, you basically need three things:
    Also get this version that doesn't use a GPU (uses a CPU only) to calculate the prime numbers less
    than 1,000,000:
    ~~~
-   wget https://raw.githubusercontent.com/ualberta-rcg/python-cluster/gh-pages/files/primes-cpu.py
+   wget https://raw.githubusercontent.com/ualberta-rcg/python-cluster/gh-pages/files/primes_cpu.py
    ~~~
    {: .language-bash}
 
@@ -313,7 +313,7 @@ To run a GPU job, you basically need three things:
 > > pip install --no-index --upgrade pip
 > > pip install --no-index numba
 > >
-> > python primes-gpu.py
+> > python primes_gpu.py
 > > ~~~
 > > {: .language-bash}
 > >
@@ -336,7 +336,7 @@ To run a GPU job, you basically need three things:
 > > pip install --no-index --upgrade pip
 > > pip install --no-index numba
 > >
-> > python primes-cpu.py
+> > python primes_cpu.py
 > > ~~~
 > > {: .language-bash}
 > {: .solution}

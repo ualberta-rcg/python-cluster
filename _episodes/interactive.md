@@ -48,7 +48,7 @@ source $SLURM_TMPDIR/venv/bin/activate
 pip install --no-index --upgrade pip
 pip install --no-index numba
 
-python primes-cpu.py
+python primes_cpu.py
 ~~~
 {: .language-bash}
 
@@ -79,7 +79,7 @@ Now we get to the part where the prime detection script is run, the one that doe
 We will force this into the background using `&` at the end of the line:
 
 ~~~
-python primes-cpu.py &
+python primes_cpu.py &
 ~~~
 {: .language-bash}
 
