@@ -276,6 +276,8 @@ To run a GPU job, you basically need three things:
 > Let's put things together to write a job script that runs this GPU code. Some features of this
 > script:
 > * Ask Slurm for a GPU (above)
+> * We don't know how long this is going to run, so it's often useful to air on the side of
+>   caution: ask for 30 minutes from the scheduler.
 > * Load both the `python` and `cuda` modules.
 > * Create a virtual environment on local disk of the node you are running on,
 >   activate it, upgrade `pip`, and use `pip` to install `numba`
@@ -300,7 +302,7 @@ To run a GPU job, you basically need three things:
 > > #SBATCH --tasks-per-node=1
 > > #SBATCH --cpus-per-task=1
 > > #SBATCH --mem-per-cpu=1000M
-> > #SBATCH --time=00:10:00
+> > #SBATCH --time=00:30:00
 > > #SBATCH --gres=gpu:1
 > >
 > > module load python/3.11 cuda
@@ -324,7 +326,7 @@ To run a GPU job, you basically need three things:
 > > #SBATCH --tasks-per-node=1
 > > #SBATCH --cpus-per-task=1
 > > #SBATCH --mem-per-cpu=1000M
-> > #SBATCH --time=00:10:00
+> > #SBATCH --time=00:30:00
 > >
 > > module load python/3.11
 > >
