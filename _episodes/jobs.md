@@ -21,49 +21,56 @@ keypoints:
 
 # Hello world job
 
-Let's write a short program `hello.sh` that says "Hello" from the computer it is run on.
+Let's write a short python program `hello.py` that says "Hello" from the computer it is run on.
 
-
-```
+~~~
 import subprocess
 print("Hello from ...")
 subprocess.run("hostname")
-```
+~~~
+{: .language-python}
 
 We can write a bash script `hello.sh` that runs this program:
 
-```
+~~~
 #!/bin/bash                                                                     
 
 module load python/3.11
 
 python hello.py
-```
+~~~
+{: .language-bash}
+
+
 You can give it a try on the command line:
 
-```
+~~~
 bash hello.sh
-```
+~~~
+{: .language-bash}
 
 Now it turns out that you could also submit this script as a batch job to Slurm:
 
-```
+~~~
 sbatch hello.sh
-```
+~~~
+{: .language-bash}
 
 ## The queue
 
 You can check your jobs that are in the queue with:
 
-```
+~~~
 squeue -u $USER
-```
+~~~
+{: .language-bash}
 
 On the regular Alliance clusters, there is a shorthand command:
 
-```
+~~~
 sq
-```
+~~~
+{: .language-bash}
 
 Only queued (pending) and running jobs will be shown, so if your job has finished running you
 won't see it in the queue
@@ -84,7 +91,7 @@ Common defaults are 1 hour for run time, and 256MB for each CPU core.
 We can modify our script to put in some comments, but these comments (all starting with `#SBATCH`)
 instruct the scheduler what resources we want for our job:
 
-```
+~~~
 #!/bin/bash
 
 #SBATCH --nodes=1
@@ -96,7 +103,8 @@ instruct the scheduler what resources we want for our job:
 module load python/3.11
 
 python hello.py
-```
+~~~
+{: .language-bash}
 
 Of note, the memory is requested by core (we only ask for one core though), since
 this is often a good way to scale up a program for later. The `M` stands for Megabytes.
@@ -126,15 +134,17 @@ which account to use either in the script, or on the commandline. (I often prefe
 
 In the script, add the line:
 
-```
+~~~
 #SBATCH --account=def=sponsor00
-```
+~~~
+{: .language-bash}
 
 On the commandline, submit with the following command:
 
-```
+~~~
 sbatch --account=def-sponsor00 hello.sh
-```
+~~~
+{: .language-bash}
 
 ## The speed of storage matters
 
@@ -145,13 +155,18 @@ Most cluster users will know the three main filesystems on a cluster:
 * `project`
 
 Each of these filesystems are on disk that is connected to the computers you are using
-over a network. In general, networked disk is slower than local disk (when the disk is connected
+over a network. We can typically expect that `scratch` is faster than `project`, and
+that `project` is faster than `home`.
+
+But in general, networked disk is slower than local disk (when the disk is connected
 to the computer you are using), but in order for all of the computers in the cluster to access
-these filesystems, a network needs to be involved.
+these filesystems, a network needs to be involved, as do other services like metadata servers
+to support the parallel filesystem.
 
 The situation is worse than this. Unlike the disk in your laptop, on the cluster there might
 be hundreds of users all using the same filesystem at the same time. This makes the disk
-performance issue even worse.
+performance issue even worse. Some users that are running on a cluster for the first time
+might be puzzled why they are getting much worse performance than on their own laptops.
 
 Performance issues are particularly noticable in situations where many files are read/written to.
 It is better to do a few big writes to a few files than it is to do many little writes to a
@@ -180,15 +195,27 @@ difficult to debug things.
 network. So if your job involves multiple computers, it's likely that `$SLURM_TMPDIR` won't be a good
 fit (there are cases where you can make things work though).
 
+If your job is processing a collection of many files (e.g., a machine learning training set).
+it's recommended that you keep the files in an archive (zip, tar, ... i.e., a single big file),
+then transfer it to local disk during your job and extract the many files there.
+
 ## Virtual environments are a collection of many files ...
 
 When you assemble a virtual environment, you are usually creating a large colletion of Python files.
+
+Try this with one of your virtual environments:
+
+~~~
+# Count the files in a virtual environment
+find venv | wc -l
+~~~
+{: .language-bash}
 
 **Because of this, it is highly recommended that you create your virtual environments on local disk**
 
 This is what it looks like:
 
-```
+~~~
 #!/bin/bash
 
 #SBATCH --nodes=1
@@ -205,7 +232,8 @@ pip install --no-index pandas
 # Install any other packages you need here
 
 python hello.py
-```
+~~~
+{: .language-bash}
 
 Note that compute nodes don't have access to the internet to grab
 packages from PyPI, so it's really important to add the `--no-index`
@@ -233,7 +261,7 @@ To run a GPU job, you basically need three things:
    GPU, but the most generic way to make such a request is to add a line to your batch script
    that looks like:
    
-   ```#SBATCH --gres=gpu:1```
+   `#SBATCH --gres=gpu:1`
    
    This tells the scheduler "give me one GPU, I don't care what kind".
    If the type of GPU is of concern to you, check out the options on the Alliance GPU page:
@@ -243,7 +271,7 @@ To run a GPU job, you basically need three things:
    
    Just like with loading the Python module, we can load CUDA with:
 
-   ```module load cuda```
+   `module load cuda`
    
    This will allow your software to find the CUDA libraries. You can run
    `module spider cuda` to find out what versions of CUDA are available.
