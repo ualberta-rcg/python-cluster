@@ -25,6 +25,7 @@ The expectations of the students is that they have previously taken:
 
 Today we'll look at:
 
+* Why run on a cluster?
 * Virtual environments and installing packages;
 * Submitting jobs that run Python code;
 * Storage choices and the impact on performance;
