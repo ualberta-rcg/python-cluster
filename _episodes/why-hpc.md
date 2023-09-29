@@ -33,5 +33,7 @@ keypoints:
   terms of computational power, e.g., maybe your program can use multiple CPUs, or can
   be accellerated with an expensive GPU, or maybe it needs more memory that what you currently
   have access to.
+* You need access to more storage than is available to you on your laptop or cloud-based
+  solutions.
 
 {% include links.md %}
