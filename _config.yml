@@ -134,6 +134,7 @@ highlighter: rouge
 
 episode_order:
   - introduction
+  - why-hpc
   - virtual-environments
   - jobs
   - interactive
