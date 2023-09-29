@@ -96,4 +96,5 @@ Check `jobs` again to see it and get the job id.
 
 Finally `bg [job id]` (e.g., probably `bg 1`) runs the program in the background.
 
-While the program is running in the background, run the `htop` command.
+While the program is running in the background, run the `htop` command. (And `htop -u` ...
+and if trying with a GPU node, try `module load cuda; nvidia-smi`)
