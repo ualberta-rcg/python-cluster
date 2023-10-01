@@ -137,5 +137,6 @@ episode_order:
   - why-hpc
   - virtual-environments
   - jobs
+  - arrays
   - interactive
   - jupyterhub

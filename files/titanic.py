@@ -32,6 +32,7 @@ def main():
     predictions = model.predict(X_test)
 
     # Evaluate how well the model did
+    print()
     print('Model: {}'.format(args.model))
     print('Accuracy: {}'.format(accuracy_score(y_test, predictions)))
     print('Precision: {}'.format(precision_score(y_test, predictions)))
@@ -44,9 +45,10 @@ def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model",
                         choices={"decision_tree",
-                                            "random_forest",
-                                            "state_vector_machine"},
-                        help="Select which model to use")
+                                 "random_forest",
+                                 "state_vector_machine"},
+                        help="Select which model to use",
+                        required=True)
     args = parser.parse_args()
     if (args.model == "decision_tree"):
         get_model = get_decision_tree
@@ -54,8 +56,6 @@ def get_arguments():
         get_model = get_random_forest
     elif (args.model == "state_vector_machine"):
         get_model = get_state_vector_machine
-    else:
-        raise ValueError('Invalid model')
 
 def get_decision_tree():
     from sklearn.tree import DecisionTreeClassifier
