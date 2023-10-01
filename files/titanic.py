@@ -14,7 +14,7 @@ def main():
     # np.random.seed(1337)
 
     # Load data
-    train_df = pd.read_csv('data/titanic/train.csv')
+    train_df = pd.read_csv('titanic-train.csv')
 
     # Choose features and lables
     features = ["Pclass", "Sex", "SibSp", "Parch"]
@@ -32,6 +32,7 @@ def main():
     predictions = model.predict(X_test)
 
     # Evaluate how well the model did
+    print('Model: {}'.format(args.model))
     print('Accuracy: {}'.format(accuracy_score(y_test, predictions)))
     print('Precision: {}'.format(precision_score(y_test, predictions)))
     print('Recall: {}'.format(recall_score(y_test, predictions)))
@@ -53,13 +54,15 @@ def get_arguments():
         get_model = get_random_forest
     elif (args.model == "state_vector_machine"):
         get_model = get_state_vector_machine
+    else:
+        raise ValueError('Invalid model')
 
 def get_decision_tree():
     from sklearn.tree import DecisionTreeClassifier
     return DecisionTreeClassifier(max_depth=3)
 
 def get_random_forest():
-    sklearn.ensemble.RandomForestClassifier
+    from sklearn.ensemble import RandomForestClassifier
     return RandomForestClassifier(max_depth=3, n_estimators=100)
 
 def get_state_vector_machine():
