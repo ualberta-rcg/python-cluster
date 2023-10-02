@@ -3,7 +3,7 @@ title: "Why run Python on a cluster?"
 teaching: 5
 exercises: 0
 questions:
-- "When would I run on a cluster?"
+- "When should I run Python on an cluster?"
 objectives:
 - "Understand when running on a cluster is worth it, and when it isn't"
 keypoints:

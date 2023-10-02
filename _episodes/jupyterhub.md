@@ -1,6 +1,6 @@
 ---
 title: "Running a notebook in a JupyterHub"
-teaching: 0
+teaching: 20
 exercises: 0
 questions:
 - "How do I run a notebook in a JupyterHub?"

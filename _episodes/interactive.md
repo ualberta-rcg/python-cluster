@@ -1,6 +1,6 @@
 ---
 title: "Running interactive jobs"
-teaching: 0
+teaching: 30
 exercises: 0
 questions:
 - "How do I run jobs that allow me to interact with my python code?"

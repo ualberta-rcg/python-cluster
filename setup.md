@@ -2,12 +2,12 @@
 title: Setup
 ---
 
-It is hoped that you have already taken an introductory to shell, introduction to HPC and an
+It is hoped that you have already taken an introduction to shell, introduction to HPC and an
 introductory Python course and have connected to a cluster via SSH previously. The Research Computing
 Group at the University of Alberta periodically provide the following prerequisite courses (based off of
 content from the Carpentries):
 
-* <https://ualberta-rcg.github.io/hpc-intro/>
+* <https://ualberta-rcg.github.io/hpc-shell/>
 * <https://ualberta-rcg.github.io/hpc-intro/>
 * <https://ualberta-rcg.github.io/python-intro/>
 
