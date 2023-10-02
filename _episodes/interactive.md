@@ -16,18 +16,18 @@ keypoints:
 Batch jobs are great, but you need to implement them correctly before they will work.
 
 It's quite unsatisfying having to run a job just to find out if it will work or not.
-This is particularly true if you are experiencing long wait times, just to have a
-job fail in a few seconds or minutes.
+This is particularly true if your jobs are experiencing long wait times in the
+scheduler queue, just to have a job fail in a few seconds or minutes.
 
-Interactive jobs let you have a better turn around time while sorting your job out
--- the scheduler gives you the resources you want, and connects you to a compute
-node to try things out.
+Interactive jobs let you have a better turnaround time while figuring your job out
+-- the scheduler gives you the resources you want, and connects you to a terminal session
+on the compute node to try things out.
 
 They also give an opportunity to run monitoring tools to see how your program is faring.
 
 ## Use `salloc` instead of `sbatch`
 
-Let's take the CPU prime example from last time (the GPU example would be great to try,
+Let's take the CPU prime example from an earlier lesson (the GPU example would be great to try,
 but we don't have enough GPUs to ensure a reasonable waiting time for all students).
 
 **`submit-cpu.sh`**
@@ -96,5 +96,7 @@ Check `jobs` again to see it and get the job id.
 
 Finally `bg [job id]` (e.g., probably `bg 1`) runs the program in the background.
 
-While the program is running in the background, run the `htop` command. (And `htop -u` ...
-and if trying with a GPU node, try `module load cuda; nvidia-smi`)
+While the program is running in the background, run the `htop` command (and `htop -u`).
+
+If trying with a GPU node, add `--gres=gpu:1` to you salloc, load the cuda module (`module load cuda`),
+and check out what the gpu is doing with `nvidia-smi`.

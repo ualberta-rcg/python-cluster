@@ -15,10 +15,11 @@ keypoints:
 Writing job scripts isn't exactly the most rewarding experience.
 This is particularly true when you are writing many almost identical job scripts.
 
-Luckily Slurm has a solution for this: job arrays.
+Luckily Slurm has a solution for this: **job arrays**.
 
 How it works:
-* You specify in you script an array of indices that you want to use to parameterize your job.
+* You specify in you script an array of integer indices that you want to use to parameterize some
+sub-jobs.
   Some examples:
   ~~~
   #SBATCH --array=0-7
@@ -30,14 +31,22 @@ How it works:
   The second and third examples are the same (the `:2` means "every second number").
   
   The last example means "run at most 10 of them at a given time"
-* Your script will run one time for each index specified. Each time it runs, it will have
-  access to the environment variable `$SLURM_ARRAY_TASK_ID`, which will have the value of the
-  index for this specific run. In the second example above, four sub-jobs are submitted into the
+* Your script will run **one time for each index specified**. Each time it runs, the script will have
+  access to the environment variable **`$SLURM_ARRAY_TASK_ID`**, which will have the value of the
+  index for this specific run.
+  
+  In the second example above, four sub-jobs are submitted into the
   queue, one will run with `$SLURM_ARRAY_TASK_ID` equal to `1`, another with `$SLURM_ARRAY_TASK_ID`
   equal to `3`, and so on.
 * Each sub-job will appear separately in the queue, each with a separate log file.
 
+Job arrays are an excellent way to exploit a kind of parallelism without having to
+make your serial program parallel: since multiple jobs can run at the same time, the
+net effect is that your multiple serial jobs are running in parallel.
+
 Here is a very basic example of how arrays work, try submitting it:
+
+**`array-basic.sh`**
 
 ~~~
 #SBATCH --array=1,4,7
@@ -144,7 +153,7 @@ There are a number of ways.
 
 > ## Putting it together ...
 > Let's write a job script for an array job that does some machine learning, using
-> different models on the classic [Titanic data set]()
+> different models on the classic [Titanic data set](https://www.kaggle.com/competitions/titanic)
 >
 > First we download a script and some data:
 >
