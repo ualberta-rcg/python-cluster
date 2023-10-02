@@ -108,6 +108,13 @@ primes_cpu.main()
 Another example:
 
 ~~~
+!pip install --no-index pandas scikit-learn numpy
+~~~
+{: .language-python}
+
+(You may need to restart the kernel first ... You may also need to change directories with `cd`).
+
+~~~
 import titanic
 titanic.main('random_forest')
 ~~~

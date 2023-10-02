@@ -27,7 +27,7 @@ def main(model_name):
 
     # Evaluate how well the model did
     print()
-    print('Model: {}'.format(args.model))
+    print('Model: {}'.format(model_name))
     print('Accuracy: {}'.format(accuracy_score(y_test, predictions)))
     print('Precision: {}'.format(precision_score(y_test, predictions)))
     print('Recall: {}'.format(recall_score(y_test, predictions)))
@@ -39,6 +39,7 @@ def get_model(model_name):
         return get_random_forest()
     elif (model_name == "state_vector_machine"):
         return get_state_vector_machine()
+    raise ValueError('Model not found')
 
 def get_decision_tree():
     from sklearn.tree import DecisionTreeClassifier

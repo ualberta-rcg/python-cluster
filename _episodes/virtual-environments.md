@@ -142,6 +142,10 @@ pip install --no-index pandas
 ```
 {: .language-bash}
 
+If you neglect to include `--no-index` when installing with `pip` you can run into
+real problems where `pip` tries to access PyPI but can't due to lack of internet
+access. Your install command might hang forever without completing.
+
 Now start up the Python console and try `import pandas`. Did it work?
 
 To see all of the wheels that are in the Alliance wheelhouse, visit this page:
