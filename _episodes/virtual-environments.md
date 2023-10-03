@@ -174,7 +174,7 @@ By sure to keep all of this inside of quotation marks (I prefer single quotes):
 ~~~
 pip install --no-index 'flask==1.1.2'
 ~~~
-<: .language-bash>
+{: .language-bash}
 
 ## Checking which packages are installed
 
