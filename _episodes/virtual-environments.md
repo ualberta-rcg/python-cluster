@@ -16,7 +16,7 @@ keypoints:
 ---
 
 If you've learned python using Jupyter notebooks, you may have never run python on the
-command line or seen a virtual environment before. Quite ofter packages like `pandas` and
+command line or seen a virtual environment before. Quite often packages like `pandas` and
 `numpy` are "just there" when we use online notebook services like Colab.
 
 On a cluster, we have many options for how we want to run Python. We have a system called
@@ -316,6 +316,7 @@ module reset
 > > # First virtual environment
 > > module load python/3.10
 > > virtualenv --no-download venv3
+> > source venv3/bin/activate
 > > pip install --no-index --upgrade pip
 > > pip install --no-index dask 'distributed==1.28.1'
 > > pip freeze > requirements2.txt
@@ -324,6 +325,7 @@ module reset
 > > # Second virtual environment
 > > module load python/3.10
 > > virtualenv --no-download venv4
+> > source venv4/bin/activate
 > > pip install --no-index --upgrade pip
 > > pip install --no-index -r requirements2.txt
 > > ~~~
