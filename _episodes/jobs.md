@@ -309,10 +309,10 @@ To run a GPU job, you basically need three things:
 > * Load both the `python` and `cuda` modules.
 > * Create a virtual environment on local disk of the node you are running on,
 >   activate it, upgrade `pip`, and use `pip` to install `numba` (version `0.57.0`).
-> * Run the `primes-gpu.py` python script
+> * Run the `primes_gpu.py` python script
 > * Record the job id from `squeue`
 > * Write a second submission script and repeat this process to run the CPU version of the
->   script (`primes-cpu.py`). Don't ask for a GPU this time, you won't need it and you will
+>   script (`primes_cpu.py`). Don't ask for a GPU this time, you won't need it and you will
 >   end up waiting a long time in the queue. You also don't need to load the CUDA module
 >   (it really doesn't matter though).
 > * Also record the job id for this run.
@@ -321,7 +321,7 @@ To run a GPU job, you basically need three things:
 > some performance information for each job
 > > ## Solution
 > >
-> > **`submit-gpu.sh`**
+> > **`submit_gpu.sh`**
 > >
 > > ~~~
 > > #!/bin/bash
@@ -345,7 +345,7 @@ To run a GPU job, you basically need three things:
 > > ~~~
 > > {: .language-bash}
 > >
-> > **`submit-cpu.sh`**
+> > **`submit_cpu.sh`**
 > >
 > > ~~~
 > > #!/bin/bash
