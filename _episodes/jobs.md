@@ -278,7 +278,7 @@ To run a GPU job, you basically need three things:
 
 3. **You need to load a package in your virtual environment that uses the GPU.**
 
-   In this case, we will use `pip` to install `numba` in our virtual environment.
+   In this case, we will use `pip` to install `numba` (version `0.57.0`) in our virtual environment.
 
 4. **Your Python script must be written to use such a library.**
    
@@ -308,7 +308,7 @@ To run a GPU job, you basically need three things:
 >   caution: ask for 30 minutes from the scheduler.
 > * Load both the `python` and `cuda` modules.
 > * Create a virtual environment on local disk of the node you are running on,
->   activate it, upgrade `pip`, and use `pip` to install `numba`
+>   activate it, upgrade `pip`, and use `pip` to install `numba` (version `0.57.0`).
 > * Run the `primes-gpu.py` python script
 > * Record the job id from `squeue`
 > * Write a second submission script and repeat this process to run the CPU version of the
@@ -339,7 +339,7 @@ To run a GPU job, you basically need three things:
 > > source $SLURM_TMPDIR/venv/bin/activate
 > >
 > > pip install --no-index --upgrade pip
-> > pip install --no-index numba
+> > pip install --no-index numba==0.57.0
 > >
 > > python primes_gpu.py
 > > ~~~
@@ -362,7 +362,7 @@ To run a GPU job, you basically need three things:
 > > source $SLURM_TMPDIR/venv/bin/activate
 > >
 > > pip install --no-index --upgrade pip
-> > pip install --no-index numba
+> > pip install --no-index numba==0.57.0
 > >
 > > python primes_cpu.py
 > > ~~~
