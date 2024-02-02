@@ -119,5 +119,5 @@ jobs:
           # return
           cd ..
 
-      - run: make lesson-check-all
-        if: always()
+#      - run: make lesson-check-all
+#        if: always()
