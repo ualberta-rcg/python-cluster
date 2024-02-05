@@ -151,6 +151,14 @@ Now start up the Python console and try `import pandas`. Did it work?
 To see all of the wheels that are in the Alliance wheelhouse, visit this page:
 <https://docs.alliancecan.ca/wiki/Available_Python_wheels>
 
+Please note that if there is a python package that you need that you
+find is not in the Alliance wheelhouse, you can contact support to request
+that it be added: <support@tech.alliancecan.ca>.
+
+If the missing package is "pure python", there is also a chance that you
+can download a wheel from PyPI (on a login node) and install it directly
+into your virual environment from your account.
+
 ## A warning
 
 If you don't have a virtual environment enabled, `pip` will attempt to install packages so they
