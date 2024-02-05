@@ -11,6 +11,14 @@ keypoints:
 - "Most Alliance clusters have a JupyterHub"
 ---
 
+# Jupyter Notebooks
+
+It's quite likely that you have used Jupyter notebooks in the past.
+They can be a convenient way to test ideas and construct new code.
+While Jupyter notebooks aren't the preferred choice for executing
+long-running code on a cluster (mostly because they are interactive
+in nature), they can be an important part of your development pipeline.
+
 # JupyterHub
 
 A JupyterHub is a way to allow multiple users to access Jupyter notebooks (and other applications)

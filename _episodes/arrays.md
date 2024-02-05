@@ -18,7 +18,7 @@ This is particularly true when you are writing many almost identical job scripts
 Luckily Slurm has a solution for this: **job arrays**.
 
 How it works:
-* You specify in you script an array of integer indices that you want to use to parameterize some
+* You specify in your script an array of integer indices that you want to use to parameterize some
 sub-jobs.
   Some examples:
   ~~~
