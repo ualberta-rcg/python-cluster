@@ -34,18 +34,18 @@ you will want.
 
 ```
 $ python --version
-Python 3.7.7
+Python 3.11.4
 ```
 {: .language-bash}
 
 Unlike your home computer, the Alliance clusters use a modular software stack that allows you to
 choose what version of python you would like to use. To use this stack, most actions are initiated
 by the `module` command. The `module load` command, followed by the name of the software you want
-(and possibly the version) gives you access to that software. For example, we can load Python 3.11
+(and possibly the version) gives you access to that software. For example, we can load Python 3.13
 with:
 
 ```
-module load python/3.11
+module load python/3.13
 ```
 {: .language-bash}
 
@@ -180,7 +180,7 @@ by using the package name, double equals signs, and the version number.
 By sure to keep all of this inside of quotation marks (I prefer single quotes):
 
 ~~~
-pip install --no-index 'flask==1.1.2'
+pip install --no-index 'flask==3.0.1'
 ~~~
 {: .language-bash}
 
@@ -242,7 +242,7 @@ Note: you can't have more than one virtual environment active at a time.
 Let's create a second virtual environment called `venv2`:
 
 ```
-module load python/3.11
+module load python/3.13
 virtualenv --no-download venv2
 source venv2/bin/activate
 pip install --upgrade --no-index pip
@@ -262,21 +262,21 @@ software stack that contains many of them: `scipy-stack`.
 We can load the `scipy-stack` as follows:
 
 ```
-module load python/3.11
+module load python/3.13
 module load scipy-stack
 ```
 {: .language-bash}
 
-As of this writing, the version of `scipy-stack` that gets loaded is `2023b`.
+As of this writing, the version of `scipy-stack` that gets loaded is `2025a`.
 You can be explicit about this:
 
 ```
-module load python/3.11
-module load scipy-stack/2023b
+module load python/3.13
+module load scipy-stack/2025a
 ```
 {: .language-bash}
 
-If you would like to know which packages are loaded, check out `module spider scipy-stack/2023b`
+If you would like to know which packages are loaded, check out `module spider scipy-stack/2025a`
 or do a `pip freeze` (although you will also see some packages that come with the `python` module).
 
 ## Unloading a module
@@ -285,7 +285,7 @@ One you've deactivated a virtual environment, you might decide you want to work 
 version of Python. You can unload the Python module with:
 
 ```
-module unload python/3.11
+module unload python/3.13
 ```
 {: .language-bash}
 
@@ -309,11 +309,11 @@ module reset
 > ## Creating virtual environments
 > Now that we have a clean setup (virtual environments are deactivated and modules are reset), 
 > try the following on your own:
-> * Load Python 3.10
+> * Load Python 3.12
 > * Create a virtual environment and activate it (careful to choose a new name or work in a new
 >   directory, since we have already used `venv` and `venv2`)
 > * Upgrade `pip`
-> * Install the packages `dask` and `distributed` (version `1.28.1`).
+> * Install the packages `dask` and `distributed` (version `2024.11.2`).
 > * Create a requirements file (e.g., `requirements2.txt`).
 > * Deactivate your virtual environment.
 > * Create a second virtual environment (and activate it!) and use your requirements file to populate it.
@@ -322,16 +322,16 @@ module reset
 > > ## Solution
 > > ~~~
 > > # First virtual environment
-> > module load python/3.10
+> > module load python/3.12
 > > virtualenv --no-download venv3
 > > source venv3/bin/activate
 > > pip install --no-index --upgrade pip
-> > pip install --no-index dask 'distributed==1.28.1'
+> > pip install --no-index dask 'distributed==2024.11.2'
 > > pip freeze > requirements2.txt
 > > deactivate
 > >
 > > # Second virtual environment
-> > module load python/3.10
+> > module load python/3.12
 > > virtualenv --no-download venv4
 > > source venv4/bin/activate
 > > pip install --no-index --upgrade pip

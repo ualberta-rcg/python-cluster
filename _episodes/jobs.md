@@ -35,7 +35,7 @@ We can write a bash script `hello.sh` that runs this program:
 ~~~
 #!/bin/bash                                                                     
 
-module load python/3.11
+module load python/3.13
 
 python hello.py
 ~~~
@@ -100,7 +100,7 @@ instruct the scheduler what resources we want for our job:
 #SBATCH --mem-per-cpu=1000M
 #SBATCH --time=00:10:00
 
-module load python/3.11
+module load python/3.13
 
 python hello.py
 ~~~
@@ -135,7 +135,7 @@ which account to use either in the script, or on the commandline. (I often prefe
 In the script, add the line:
 
 ~~~
-#SBATCH --account=def=sponsor00
+#SBATCH --account=def-sponsor00
 ~~~
 {: .language-bash}
 
@@ -239,7 +239,7 @@ Note that compute nodes don't have access to the internet to grab
 packages from PyPI, so it's really important to add the `--no-index`
 flag to pip.
 
-## An exercise using GPUs
+## An exercise using GPUs (or possibly a demo, depending on the training cluster ...)
 
 GPUs (Graphical Processing Units) can speed up a number of different kinds of codes in a
 number of different domains (Machine Learning being a hot example right now).
@@ -266,6 +266,13 @@ To run a GPU job, you basically need three things:
    This tells the scheduler "give me one GPU, I don't care what kind".
    If the type of GPU is of concern to you, check out the options on the Alliance GPU page:
    <https://docs.alliancecan.ca/wiki/Using_GPUs_with_Slurm>
+
+   Also, many clusters have options to use a partial GPU for your job, through a technology
+   called MIG (Multi-Instance GPU). This is often a good choice for jobs that may not
+   exhaust the entire memory of the GPU. It also costs less with respect to how the scheduler
+   works. More about this here:
+
+   <https://docs.alliancecan.ca/wiki/Multi-Instance_GPU>
 
 2. **You need to load the CUDA modules.**
    
@@ -308,7 +315,8 @@ To run a GPU job, you basically need three things:
 >   caution: ask for 30 minutes from the scheduler.
 > * Load both the `python` and `cuda` modules.
 > * Create a virtual environment on local disk of the node you are running on,
->   activate it, upgrade `pip`, and use `pip` to install `numba` (version `0.57.0`).
+>   activate it, upgrade `pip`, and use `pip` to install `numba` (version doesn't really matter,
+>   but well use `0.61.2`).
 > * Run the `primes_gpu.py` python script
 > * Record the job id from `squeue`
 > * Write a second submission script and repeat this process to run the CPU version of the
@@ -333,13 +341,13 @@ To run a GPU job, you basically need three things:
 > > #SBATCH --time=00:30:00
 > > #SBATCH --gres=gpu:1
 > >
-> > module load python/3.11 cuda
+> > module load python/3.13 cuda/12
 > >
 > > virtualenv --no-download $SLURM_TMPDIR/venv
 > > source $SLURM_TMPDIR/venv/bin/activate
 > >
 > > pip install --no-index --upgrade pip
-> > pip install --no-index numba==0.57.0
+> > pip install --no-index numba==0.61.2
 > >
 > > python primes_gpu.py
 > > ~~~
@@ -356,13 +364,13 @@ To run a GPU job, you basically need three things:
 > > #SBATCH --mem-per-cpu=1000M
 > > #SBATCH --time=00:30:00
 > >
-> > module load python/3.11
+> > module load python/3.13
 > >
 > > virtualenv --no-download $SLURM_TMPDIR/venv
 > > source $SLURM_TMPDIR/venv/bin/activate
 > >
 > > pip install --no-index --upgrade pip
-> > pip install --no-index numba==0.57.0
+> > pip install --no-index numba==0.61.2
 > >
 > > python primes_cpu.py
 > > ~~~

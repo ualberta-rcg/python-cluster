@@ -3,7 +3,8 @@ import numpy as np
 from math import sqrt, ceil
 
 def main():
-    print(find_primes(1_000_000))
+    primes = find_primes(5_000_000)
+    print([int(x) for x in primes])
 
 @nb.vectorize(['int32(int32)'])
 def check_prime_gpu(num):

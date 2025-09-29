@@ -29,6 +29,7 @@ Today we'll look at:
 * Virtual environments and installing packages;
 * Submitting jobs that run Python code;
 * Storage choices and the impact on performance;
+* Array jobs and methods to work with them;
 * Interactive jobs;
 * Connecting to HPC JupyterHubs.
 
