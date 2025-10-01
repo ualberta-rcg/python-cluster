@@ -25,15 +25,20 @@ A JupyterHub is a way to allow multiple users to access Jupyter notebooks (and o
 in a way so that each user gets their own isolated environment. This has some similarity to
 Google's cloud-based Colab service.
 
-Your instructor will give you the URL for the JupyterHub login page (usually putting the address of the
-training cluster into the URL bar of your browser will get you there).
-
 Production Alliance clusters will have 'jupyterhub' in the front of the cluster name, e.g.,
 
-* <https://jupyterhub.cedar.computecanada.ca>
-* <https://jupyterhub.narval.computecanada.ca>
-* <https://jupyterhub.beluga.computecanada.ca>
-* <https://jupyterhub.graham.computecanada.ca>
+* <https://jupyterhub.narval.alliancecan.ca>
+* <https://jupyterhub.rorqual.alliancecan.ca>
+* <https://jupyterhub.fir.alliancecan.ca>
+
+Other production clusters may use a software called OpenOnDemand that also includes
+JupterHub functionality, for example:
+
+<https://ondemand.sharcnet.ca>
+<https://ondemand.scinet.utoronto.ca>
+
+Your instructor will give you the URL for the JupyterHub login page (usually putting the address of the
+training cluster into the URL bar of your browser will get you there).
 
 Once you have arrived at the JupyterHub page, you can log in with the same username
 and password used to log into the cluster via SSH.

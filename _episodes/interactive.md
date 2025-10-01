@@ -40,7 +40,7 @@ but we don't have enough GPUs to ensure a reasonable waiting time for all studen
 #SBATCH --mem-per-cpu=1000M
 #SBATCH --time=00:30:00
 
-module load python/3.11
+module load python/3.13
 
 virtualenv --no-download $SLURM_TMPDIR/venv
 source $SLURM_TMPDIR/venv/bin/activate
@@ -67,7 +67,7 @@ from the scheduler. We will eventually get a command prompt.
 From here we can try out the first few lines from the SLURM script, one at a time:
 
 ~~~
-module load python/3.11
+module load python/3.13
 virtualenv --no-download $SLURM_TMPDIR/venv
 source $SLURM_TMPDIR/venv/bin/activate
 pip install --no-index --upgrade pip

@@ -57,6 +57,11 @@ sleep 60
 ~~~
 {: .language-bash}
 
+Then run: **`sbatch array-basic.sh`**
+
+(Note: there is actually a small error in the above script
+-- when you submit the script you will see it. Try to correct it.)
+
 ## How do I use `$SLURM_ARRAY_TASK_ID` with my python program?
 
 There are a number of ways.
@@ -81,7 +86,7 @@ There are a number of ways.
   #SBATCH --array=1,4,7
   #SBATCH --time=00:10:00
 
-  module load python/3.11
+  module load python/3.13
 
   python array-env.py
   ~~~
@@ -112,7 +117,7 @@ There are a number of ways.
   #SBATCH --array=1,4,7
   #SBATCH --time=00:10:00
 
-  module load python/3.11
+  module load python/3.13
 
   python array-arg.py $SLURM_ARRAY_TASK_ID
   ~~~
@@ -133,7 +138,7 @@ There are a number of ways.
   #SBATCH --array=0-2
   #SBATCH --time=00:10:00
 
-  module load python/3.11
+  module load python/3.13
 
   things=('dogs' 'cats' 'other things')
 
@@ -186,6 +191,13 @@ There are a number of ways.
 >
 > (Tip: copy/paste from the previous example, and the one in the 'jobs' section of this workshop.)
 > 
+> When crafted correctly, a single slurm script will run the `titanic.py` python script
+>  with the three different models in separate sub jobs, i.e.,:
+>
+> * `python titanic.py --model decision_tree`
+> * `python titanic.py --model random_forest`
+> * `python titanic.py --model state_vector_machine`
+>
 > The jobs run pretty quick, but you might be able to catch them in `squeue`.
 > Use `seff` to check out the job performance of each sub-job in the array.
 > > ## Solution
@@ -197,19 +209,20 @@ There are a number of ways.
 > > #SBATCH --array=0-2
 > > #SBATCH --time=00:10:00
 > > 
-> > module load python/3.11
+> > module load python/3.13
 > > 
 > > models=('decision_tree' 'random_forest' 'state_vector_machine')
 > > 
 > > virtualenv --no-download $SLURM_TMPDIR/venv
 > > source $SLURM_TMPDIR/venv/bin/activate
+> > pip install --no-index --upgrade pip
 > > pip install --no-index pandas numpy scikit-learn
 > > 
 > > model=${models[$SLURM_ARRAY_TASK_ID]}
 > > 
 > > python titanic.py --model "$model"
 > > ~~~
-> > {: .language-python}
+> > {: .language-bash}
 > {: .solution}
 {: .challenge}
 
